@@ -8,7 +8,7 @@ import { ProjectFacadeService } from 'src/app/facades/project.facade.service';
 import { StepperService } from '../stepper.service';
 import { CreateProjectService } from './create-project.service';
 import {Store} from "@ngrx/store";
-import {loadProjects, ProjectStateModule} from "../../../store";
+import {loadProjects, ProjectStateModule, saveProjectSuccess, setProject} from "../../../store";
 
 @Component({
   selector: 'app-create-project',
@@ -79,8 +79,14 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         .createProject(this.projectFormGroup.value)
         .pipe(
           takeUntil(this.sub$),
-          tap((res) => this.projectFacadeService.setProject(res.id)),
-          switchMap(() => this.projectFacadeService.getOnlyMyProjects$())
+        //   tap((res) => this.projectFacadeService.setProject(res.id)),
+        //   switchMap(() => this.projectFacadeService.getOnlyMyProjects$())
+        // )
+        tap((response) => {
+          const project = response;
+          this.store.dispatch(saveProjectSuccess({project}));
+          this.store.dispatch(setProject({projectId: project.id}))
+        })
         )
         .subscribe((response) => {
           this.boardFacadeService.additional.next(false);

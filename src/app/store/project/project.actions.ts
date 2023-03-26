@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import {Project} from "../../core/interfaces";
 
 export const loadProjects = createAction(
   '[Project] Load Projects'
@@ -30,4 +31,9 @@ export const setProjectsFailure = createAction(
 
 export const initCurrentProject = createAction(
   '[Project]  Init Current Project'
+);
+
+export const saveProjectSuccess = createAction(
+  '[Project] Create Project Success',
+  props<{project: Project}>()
 )
