@@ -1,0 +1,12 @@
+.mat-stepper-horizontal {
+  width: 80%;
+  margin: 12px auto;
+  background-color: #f5f5f7;
+}
+
+@media (max-width: 600px) {
+  .mat-stepper-horizontal {
+    width: 90%;
+    margin: 5px auto;
+  }
+}

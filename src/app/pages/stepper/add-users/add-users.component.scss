@@ -1,0 +1,147 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  column-gap: 0.5rem;
+}
+
+.user {
+  margin: 20px;
+  color: #46309f;
+}
+.add-user {
+  margin-bottom: 12px;
+}
+
+mat-list {
+  height: 10rem;
+  width: 30rem;
+  overflow: auto;
+  border-bottom: 2px solid #504a90;
+}
+.scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 10px;
+}
+
+mat-label.label {
+  color: #504a90;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.mat-list-item:nth-child(1) {
+  background-color: #504a90;
+}
+
+.mat-list-item span {
+  letter-spacing: 1px;
+  font-weight: 400;
+
+  margin-right: 1.4rem;
+}
+
+.mat-list-item:nth-child(1) span {
+  color: #fff;
+}
+
+.mat-list-item {
+  border-bottom: 1px solid #d4d0fe;
+  background-color: #f2f0f0;
+}
+
+.mat-list-item .btn-l {
+  font-size: 14px;
+}
+mat-progress-bar {
+  width: 15rem;
+  margin-top: 15px;
+}
+.buttons {
+  display: flex;
+  gap: 0.8rem;
+  width: 250px;
+}
+
+.bet {
+  align-items: center;
+  display: flex;
+}
+.scrolls {
+  display: flex;
+  gap: 8rem;
+  // justify-content: space-between;
+  width: 1200px;
+}
+
+.users {
+  display: flex;
+  gap: 1rem;
+}
+.skip {
+  margin-left: 1.2rem;
+}
+
+@media (max-width: 1400px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 0.5rem;
+    // background-color: #46309f;
+  }
+
+  .scrolls {
+    display: flex;
+    // flex-direction: column;
+    justify-content: flex-start;
+    gap: 10rem;
+    width: 120rem;
+  }
+
+  .scroll {
+    width: 25rem;
+  }
+  .example-list-wrapping {
+    width: 100%;
+  }
+}
+@media (max-width: 1280px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 0.5rem;
+  }
+
+  .scrolls {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4rem;
+    width: 100%;
+  }
+
+  .scroll {
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  mat-list {
+    width: 100%;
+  }
+  .scrolls {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+  }
+
+  .scroll {
+    width: 100%;
+  }
+}

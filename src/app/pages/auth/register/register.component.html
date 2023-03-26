@@ -1,0 +1,79 @@
+<div class="pt-40 items-center flex items-center justify-center">
+  <form
+    [formGroup]="registrationForm"
+    class="flex flex-col w-11/12 lg:w-3/12 text-center"
+  >
+    <h2>Register</h2>
+    <mat-form-field>
+      <mat-label>firstName</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+      <div
+        *ngIf="
+          registrationForm.get('firstName')?.invalid &&
+          registrationForm.get('firstName')?.touched
+        "
+      ></div>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>lastName</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+      <div
+        *ngIf="
+          registrationForm.get('lastName')?.invalid &&
+          registrationForm.get('lastName')?.touched
+        "
+      ></div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" />
+      <div
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          registrationForm.get('email')?.touched
+        "
+      ></div>
+      <div
+        *ngIf="
+          registrationForm.get('email')?.getError('email') &&
+          registrationForm.get('email')?.touched
+        "
+      >
+        <p>* Email format is invalid</p>
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <div
+        *ngIf="
+          registrationForm.get('password')?.invalid &&
+          registrationForm.get('password')?.touched
+        "
+      ></div>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input type="password" matInput formControlName="confirmPassword" />
+      <div
+        *ngIf="
+          registrationForm.get('confirmPassword')?.invalid &&
+          registrationForm.get('confirmPassword')?.touched
+        "
+      ></div>
+      <div
+        *ngIf="this.registrationForm.get('confirmPassword')?.errors?.['notMatch']&&
+      this.registrationForm.get('confirmPassWord')?.touched &&
+       this.registrationForm.get('password')?.touched"
+      >
+        <p>* Password does not match</p>
+      </div>
+    </mat-form-field>
+    <button type="submit" mat-button (click)="onSignUp()">Sign Up</button>
+    <button  routerLink="/auth/login" type="button" class="pt-3">
+      Already Registered?
+      <span class="text-blue-600">Login</span>
+    </button>
+  </form>
+</div>

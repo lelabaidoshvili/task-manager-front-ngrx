@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="hr"></div>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side">
+      <div class="sidenav-container">
+        <div class="sidenav-header">
+          <h2>{{ currentProject?.name }} <small>- software project</small></h2>
+        </div>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon color="primary">menu</mat-icon>
+        </button>
+        <div class="board-info">
+          <p class="side-head">Select Board &#10534;</p>
+
+          <div *ngFor="let board of currentBoards">
+            <!-- <div class="issues" *ngFor="let iss of myIssue">
+              <img [src]="iss.icon" alt="1" />
+            </div> -->
+            <button
+              [routerLink]="['/task/project-board', board.id]"
+              mat-button
+              class="board-name"
+            >
+              {{ board.name }}
+            </button>
+
+            <!-- <div class="board-info-hr"></div> -->
+          </div>
+
+          <div class="board-info-buttons">
+            <button (click)="openBoardForm()">
+              <p class="board-info-button">+ Add Board</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="side-users">Project Users &#10534;</p>
+      <div class="users" *ngFor="let user of projectUsers">
+        <div class="circle">{{ user.firstName.slice(0, 1).toUpperCase() }}</div>
+        <div class="project-users">
+          {{ user.email }}
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button class="del" (click)="deleteUser(user.id)" mat-menu-item>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+
+      <div class="user-info-buttons">
+        <button (click)="openUserForm()">
+          <p class="user-button">+ Create/Add User</p>
+        </button>
+      </div>
+      <p class="side-users">Project Issues &#10534;</p>
+      <div class="issue-loop">
+        <div *ngFor="let issue of myIssue">
+          <div class="issue-align">
+            <p>{{ issue.name }}</p>
+            <img class="img" src="{{ issue.icon }}" />
+            <button (click)="editIssue(issue.id)">&#9998;</button>
+          </div>
+        </div>
+      </div>
+
+      <button (click)="addNewIssue()">
+        <p class="issue-button">+ Add Issues</p>
+      </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div
+        class="task-container"
+        style="
+          background-image: url('/assets/images/background.img.jpeg');
+          background-size: cover;
+        "
+      >
+        <h1>Project - {{ currentProject?.name }}</h1>
+        <p class="abr">Abbreviation-{{ currentProject?.abbreviation }}</p>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon color="primary">menu</mat-icon>
+        </button>
+        <div class="columns">
+          <div class="column">
+            <p>My Task</p>
+            <div class="column-hr"></div>
+            <div *ngFor="let board of currentBoards">
+              <button
+                type="text"
+                class="task-button"
+                (click)="goToBoard(board.id)"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,128 @@
+
+
+<div
+  [ngClass]="{ navAlign: loggedIn }"
+  class="navigation flex justify-between direction-column"
+>
+  <div class="header"><h1 class="mobile" routerLink="/">My Task</h1></div>
+
+  <button *ngIf="loggedIn" class="icon-btn showIcon" (click)="toggleMenu()">
+    <mat-icon color="primary">menu</mat-icon>
+  </button>
+
+  <div class="flex justify-between">
+    <ng-container *ngIf="loggedIn; else notLoggedInState">
+      <div [ngClass]="{ show: toggle, hide: !toggle }" class="link-direction">
+        <select
+          class="select"
+          [ngModel]="currentProject?.id"
+          (ngModelChange)="selectProject($event)"
+        >
+          <option
+            *ngFor="let project of projects$ | async"
+            [value]="project.id"
+          >
+            {{ project.name | uppercase }}
+          </option>
+        </select>
+
+        <button
+          class="btn-link"
+          mat-button
+          color="primary"
+          (click)="goToStepper()"
+        >
+          ADD PROJECT
+        </button>
+
+        <button class="btn-link" mat-button color="primary" routerLink="/task">
+          TASK
+        </button>
+        <button
+          class="btn-link"
+          mat-button
+          color="primary"
+          [routerLink]="['/tables']"
+          [appPermissions]="['project:list']"
+        >
+          SETTINGS
+        </button>
+        <button
+          class="btn-link"
+          mat-button
+          color="primary"
+          [routerLink]="['/users']"
+          [appPermissions]="['user:list']"
+        >
+          USERS
+        </button>
+        <button
+          class="btn-link"
+          mat-button
+          color="primary"
+          routerLink="/backlog"
+        >
+          BACKLOG
+        </button>
+        <button
+          class="btn-link"
+          mat-button
+          color="primary"
+          [routerLink]="['/roles']"
+          [appPermissions]="['role:list']"
+        >
+          ROLES
+        </button>
+        <button
+          mat-button
+          *ngIf="toggle"
+          color="primary"
+          class="btn-link hideOut"
+          type="submit"
+          (click)="signOut()"
+        >
+          SIGN OUT
+        </button>
+        <button
+          class="hideMenu"
+          mat-mini-fab
+          color="primary"
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon button with a menu icon"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button class="email">{{ currentUser?.email }}</button>
+          <button routerLink="/" mat-menu-item>Home</button>
+          <button type="submit" mat-menu-item (click)="signOut()">
+            Sign out
+          </button>
+        </mat-menu>
+      </div>
+
+    </ng-container>
+
+    <ng-template #notLoggedInState>
+      <div class="flex gap-x-3.5 logSign">
+        <button
+          class="log"
+          routerLink="/auth/login"
+          mat-stroked-button
+          color="primary"
+        >
+          Login
+        </button>
+        <button
+          class="sign"
+          routerLink="/auth/register"
+          mat-raised-button
+          color="primary"
+        >
+          Sign-up
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

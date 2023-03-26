@@ -1,0 +1,88 @@
+<div class="container">
+  <button
+    class="more"
+    (click)="selectOtherBoards()"
+    mat-stroked-button
+    color="primary"
+  >
+    <span class="material-icons"> open_in_new </span> More Boards
+  </button>
+  <div class="header">
+    <div>
+      <h3>Projects / {{ currentProject.name }}</h3>
+      <h1>{{ activeBoard?.name }}</h1>
+    </div>
+    <div class="row">
+      <div *ngFor="let user of assignee">
+        <div class="circle">
+          {{ user.firstName.slice(0, 1).toUpperCase() }}
+        </div>
+      </div>
+
+      <mat-icon> person_add_alt_1</mat-icon>
+    </div>
+  </div>
+
+  <div class="column-container" cdkDropListGroup>
+    <div
+      class="column"
+      cdkDropList
+      *ngFor="let column of activeBoard?.columns"
+      [cdkDropListData]="activeTasks[column?.id] || []"
+      (cdkDropListDropped)="drop($event, column)"
+    >
+      <div class="column-head">
+        <h2>{{ column?.name }}</h2>
+      </div>
+      <div>
+        <div
+          class="card"
+          *ngFor="let task of activeTasks[column?.id] || []"
+          cdkDrag
+          (dblclick)="viewTask(task, column)"
+        >
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <div class="left">
+            <p class="cardText">{{ task?.name }}</p>
+            <img class="icon" [src]="task?.issueType['icon']" alt="icon" />
+          </div>
+          <div class="right">
+            <div class="dots">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button class="del" (click)="deleteTask(task.id)" mat-menu-item>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </div>
+            <div class="circle ass">
+              {{ task?.assignee["firstName"].slice(0, 1).toUpperCase() }}
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn"
+          mat-button
+          color="primary"
+          (click)="addTask(column)"
+        >
+          Add Task
+        </button>
+      </div>
+    </div>
+    <button
+      (click)="addColumn(activeBoard?.id)"
+      class="add-col"
+      mat-button
+      color="primary"
+    >
+      + Add Column
+    </button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="header">
+    <h1>Choose Board</h1>
+  </div>
+  <div class="myBoards">
+    <div *ngFor="let board of myBoard">
+      <div class="board">
+        <button (click)="clickOnCard(board.id)" class="board-name">
+          <p>{{ board.name }}</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+<!-- <button mat-stroked-button (click)="goTo()">Go To</button> -->
+<div [ngClass]="{ update: update }">
+  <button
+    [ngClass]="{ addUpdateBtn: update }"
+    class="add-board"
+    mat-raised-button
+    color="primary"
+    (click)="toggleForm()"
+  >
+    {{ update ? "Update Board" : "Add Board" }}
+  </button>
+</div>
+
+<ng-container class="form-container" *ngIf="createBoard">
+  <form [ngClass]="{ update: update }" [formGroup]="boardFormGroup">
+    <!-- <p *ngIf="update" class="text-purple-800">Update Board</p> -->
+
+    <div [ngClass]="{ wrapperUpdate: update }" class="wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="name" formControlName="name" />
+        <mat-icon matSuffix>{{
+          boardFormGroup.get("name").invalid &&
+          boardFormGroup.get("name").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>description</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        />
+        <mat-icon matSuffix>{{
+          boardFormGroup.get("description").invalid &&
+          boardFormGroup.get("description").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Position</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="position"
+          formControlName="position"
+        />
+        <mat-icon matSuffix>{{
+          boardFormGroup.get("position").invalid &&
+          boardFormGroup.get("position").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field> -->
+    </div>
+
+    <!------------------------- Table tailwind------------------------------->
+    <h4 [ngClass]="{ addUpdateBtn: update }" class="showColumns hideColumns">
+      Board Columns
+    </h4>
+    <div
+      [ngClass]="{ tableFormsUpdate: update }"
+      class="tableForms relative overflow-x-auto shadow-md sm:rounded-lg bg-violet-50 shadow-md rounded px-8 pt-6 pb-8"
+    >
+      <table
+        [ngClass]="{ tableUpdate: update }"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        formArrayName="columns"
+        class="w-full text-sm text-left bg-violet-50 dark:text-grey-400"
+      >
+        <thead class="text-xs text-white-700 uppercase bg-violet-900">
+          <tr class="vertical">
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Name
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Description
+            </th>
+            <!-- <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Position
+            </th> -->
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Task Status
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left; text-center"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="
+              let column of boardFormGroup.get('columns')['controls'];
+              let i = index
+            "
+            [formGroupName]="i"
+            cdkDropList
+            [cdkDropListData]="boardColumnArray.controls"
+            cdkDrag
+            class="bg-violet-50 dark:bg-gray-100 vertical"
+          >
+            <!-- <div class="example-custom-placeholder" *cdkDragPlaceholder></div> -->
+            <td>
+              <mat-form-field class="sized" appearance="outline">
+                <input
+                  id="default-input"
+                  type="text"
+                  matInput
+                  class="form-control"
+                  placeholder="name"
+                  formControlName="name"
+                />
+
+                <mat-icon matSuffix>{{
+                  boardFormGroup.get("columns").invalid &&
+                  boardFormGroup.get("columns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="sized" appearance="outline">
+                <input
+                  matInput
+                  type="text"
+                  class="form-control"
+                  placeholder="description"
+                  formControlName="description"
+                />
+                <mat-icon matSuffix>{{
+                  boardFormGroup.get("columns").invalid &&
+                  boardFormGroup.get("columns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td>
+            <!-- <td>
+              <mat-form-field class="sized" appearance="outline">
+                <input
+                  type="number"
+                  matInput
+                  class="form-control"
+                  placeholder="position"
+                  formControlName="position"
+                />
+                <mat-icon matSuffix>{{
+                  boardFormGroup.get("columns").invalid &&
+                  boardFormGroup.get("columns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td> -->
+
+            <td>
+              <mat-form-field class="sized" appearance="outline">
+                <mat-select
+                  placeholder="Task Status"
+                  class="form-control"
+                  formControlName="taskStatus"
+                >
+                  <mat-option *ngFor="let task of taskEnum" [value]="task">
+                    {{ task }}
+                  </mat-option>
+                </mat-select>
+                <mat-icon matSuffix>{{
+                  boardFormGroup.get("columns").invalid &&
+                  boardFormGroup.get("columns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td>
+
+            <td class="btn-up btn-mobile">
+              <div mat-dialog-actions>
+                <button
+                  (click)="deleteInputsRow(i)"
+                  mat-raised-button
+                  class="warn-button"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="add-td">
+              <button
+                [ngClass]="{ addUpdateBtn: update }"
+                type="button"
+                mat-raised-button
+                class="primary-button newCol add add-mob"
+                (click)="addColumn()"
+              >
+                Add column
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!------------------------- Table------------------------------->
+  </form>
+</ng-container>
+<div [ngClass]="{ update: update }" class="container">
+  <div>
+    <button
+      [ngClass]="{ addUpdateBtn: update }"
+      [disabled]="boardFormGroup.invalid || active"
+      class="board-save"
+      mat-raised-button
+      color="basic"
+      (click)="saveBoard()"
+    >
+      Save
+    </button>
+    <button
+      *ngIf="!update"
+      [disabled]="!goNextStep || additionalBoard"
+      class="next"
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+    >
+      Next
+    </button>
+    <mat-progress-bar *ngIf="active" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
+<div *ngIf="!update" class="scroll">
+  <mat-label class="label">My Boards</mat-label>
+  <mat-list class="example-list-wrapping">
+    <mat-list-item *ngFor="let board of myBoards.slice().reverse()" lines="3">
+      <span matListItemTitle>{{ board.name | titlecase }}</span>
+    </mat-list-item>
+  </mat-list>
+</div>

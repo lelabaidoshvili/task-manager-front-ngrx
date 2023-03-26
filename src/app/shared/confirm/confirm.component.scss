@@ -1,0 +1,16 @@
+button {
+  background-color: #9b8efe;
+  margin-right: 0.6rem;
+  padding: 0.5rem 1rem;
+  width: 5rem;
+  border-radius: 5px;
+}
+button.no {
+  background-color: transparent;
+  box-shadow: inset 0 0 10px #6f5df7;
+}
+p {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 1.2rem;
+}

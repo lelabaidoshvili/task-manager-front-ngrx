@@ -1,0 +1,15 @@
+
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Enter your name</mat-label>
+    <mat-select multiple formControlName="roles">
+      <mat-option *ngFor="let option of roles$ |async" [value]="option.id">
+        {{ option.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="dialogRef.close()">Close</button>
+  <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</div>

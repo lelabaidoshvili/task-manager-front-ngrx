@@ -1,0 +1,241 @@
+<!-- <button mat-stroked-button (click)="goTo()">Go To</button> -->
+<button
+  [ngClass]="{ alignBtn: update }"
+  class="add-issue"
+  mat-raised-button
+  color="primary"
+  (click)="toggleIssueForm()"
+>
+  {{ update ? "Update" : "Add IssueType" }}
+</button>
+
+<ng-container *ngIf="createIssueType">
+  <form [ngClass]="{ align: update }" [formGroup]="issueTypeFormGroup">
+    <div class="wrapper" [ngClass]="{ wrapperUpdate: update }">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="name" formControlName="name" />
+        <mat-icon matSuffix>{{
+          issueTypeFormGroup.get("name").invalid &&
+          issueTypeFormGroup.get("name").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="grid-item" appearance="outline">
+        <mat-label>description</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        />
+        <mat-icon matSuffix>{{
+          issueTypeFormGroup.get("description").invalid &&
+          issueTypeFormGroup.get("description").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Icon</mat-label>
+        <mat-select class="form-control" formControlName="icon">
+          <mat-option *ngFor="let icon of icons" [value]="icon">
+            <div class="al">
+              <img class="icon" src="{{ icon }}" />
+              <p>{{ icon.slice(14, -4) }}</p>
+            </div>
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>{{
+          issueTypeFormGroup.get("icon").invalid &&
+          issueTypeFormGroup.get("icon").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select class="form-control" formControlName="type">
+          <mat-option *ngFor="let issue of issueEnum" [value]="issue">
+            {{ issue }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>{{
+          issueTypeFormGroup.get("type").invalid &&
+          issueTypeFormGroup.get("type").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="colorField" appearance="outline">
+        <mat-label>Color</mat-label>
+        <input
+          type="color"
+          matInput
+          placeholder="color"
+          formControlName="color"
+        />
+        <mat-icon matSuffix>{{
+          issueTypeFormGroup.get("color").invalid &&
+          issueTypeFormGroup.get("color").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!------------------------- Table tailwind------------------------------->
+    <h4 [ngClass]="{ addUpdateBtn: update }" class="showColumns hideColumns">
+      IssueType Columns
+    </h4>
+    <div
+      [ngClass]="{ tableFormsUpdate: update }"
+      class="tableForms relative overflow-x-auto shadow-md sm:rounded-lg bg-violet-50 shadow-md rounded px-8 pt-6 pb-8"
+    >
+      <table
+        [ngClass]="{ tableUpdate: update }"
+        formArrayName="issueTypeColumns"
+        class="w-full text-sm text-left bg-violet-50 dark:text-grey-400"
+      >
+        <thead class="text-xs text-white-700 uppercase bg-violet-900">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Name
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left;"
+            >
+              Filed Name
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-white Class Properties text-left text-align: left; text-center"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let column of issueTypeFormGroup.get('issueTypeColumns')[
+                'controls'
+              ];
+              let i = index
+            "
+            [formGroupName]="i"
+            class="bg-violet-50 dark:bg-gray-100 vertical"
+          >
+            <td>
+              <mat-form-field class="sized small-input" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  class="form-control"
+                  placeholder="name"
+                  formControlName="name"
+                />
+                <mat-icon matSuffix>{{
+                  issueTypeFormGroup.get("issueTypeColumns").invalid &&
+                  issueTypeFormGroup.get("issueTypeColumns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="sized small-input" appearance="outline">
+                <mat-label>Filed Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  class="form-control"
+                  placeholder="filedName"
+                  formControlName="filedName"
+                />
+                <mat-icon matSuffix>{{
+                  issueTypeFormGroup.get("issueTypeColumns").invalid &&
+                  issueTypeFormGroup.get("issueTypeColumns").touched
+                    ? "mood_bad"
+                    : "sentiment_very_satisfied"
+                }}</mat-icon>
+              </mat-form-field>
+            </td>
+
+            <td class="btn-up">
+              <div mat-dialog-actions>
+                <button
+                  (click)="deleteInputsRow(i)"
+                  mat-raised-button
+                  class="warn-button"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <button
+                [ngClass]="{ addUpdateBtn: update }"
+                class="add"
+                type="button"
+                mat-raised-button
+                class="primary-button add-btn"
+                (click)="addIssueTypeColumn()"
+              >
+                Add New column
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </form>
+</ng-container>
+<div [ngClass]="{ alignBtns: update }" class="container">
+  <button
+    [ngClass]="{ addUpdateBtn: update }"
+    class="user"
+    [disabled]="issueTypeFormGroup.invalid || active"
+    mat-raised-button
+    color="basic"
+    (click)="saveIssueType()"
+  >
+    Save
+  </button>
+  <button
+    class="next"
+    [disabled]="!goNextStep || additionalIssue"
+    mat-raised-button
+    color="primary"
+    (click)="submit()"
+  >
+    Next
+  </button>
+  <mat-progress-bar *ngIf="active" mode="indeterminate"></mat-progress-bar>
+
+  <div class="scroll">
+    <mat-label class="label">My Issues</mat-label>
+    <mat-list class="example-list-wrapping">
+      <mat-list-item
+        *ngFor="let issue of issueTypes.slice().reverse()"
+        lines="3"
+      >
+        <span matListItemTitle>{{ issue.name | titlecase }}</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

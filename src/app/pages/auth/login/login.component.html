@@ -1,0 +1,22 @@
+<div class="pt-40 flex items-center justify-center">
+  <form [formGroup]="loginForm" class="flex flex-col w-96 lg:w-3/12 text-center">
+    <h2>Login</h2>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email">
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password">
+      <div *ngIf="loginForm.get('firstName')?.invalid && loginForm.get('firstName')?.touched">
+      </div>
+    </mat-form-field>
+    <button type="submit"  mat-button (click)="onSignIn()" >Sign In</button>
+    <button  routerLink="/auth/register" type="button" class="pt-3" >Not Registered?!
+      <span class="text-blue-600">Sign Up</span>
+    </button>
+  </form>
+</div>
+

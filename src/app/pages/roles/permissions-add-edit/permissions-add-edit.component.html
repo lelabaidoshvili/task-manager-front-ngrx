@@ -1,0 +1,15 @@
+
+<div class="container">
+  <div class="group" *ngFor="let group of groups">
+    <div class="group-name">{{group.key}}</div>
+    <div class="permission" *ngFor="let permission of group.permissions">
+      <div class="permission-name">{{permission.name}}</div>
+      <div class="permission-value">
+        <input type="checkbox" [checked]="permissions.has(permission.id)" (change)="checkPermission(permission)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<button (click)="save()">Save</button>
+

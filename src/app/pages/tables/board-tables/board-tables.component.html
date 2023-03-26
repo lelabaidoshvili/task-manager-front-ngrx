@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <table
+    mat-table
+    [dataSource]="boardsArr"
+    class="mat-elevation-z8 project-table"
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="projects-table-cell">
+        Board Name
+      </th>
+      <td mat-cell *matCellDef="let board" class="projects-table-cell">
+        {{ board.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef class="projects-table-cell">
+        Description
+      </th>
+      <td mat-cell *matCellDef="let board" class="projects-table-cell">
+        {{ board.description }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="projects-table-cell">
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let board" class="projects-table-cell">
+        <button
+          (click)="updateBoard(board.id)"
+          class="primary"
+          mat-raised-button
+        >
+          update
+        </button>
+        <button (click)="deleteBoard(board.id)" class="warn" mat-raised-button>
+          delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

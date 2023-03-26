@@ -1,0 +1,20 @@
+.add-epic {
+  margin-bottom: 12px;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  column-gap: 0.5rem;
+}
+@media (max-width: 610px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+.epic {
+  margin: 20px;
+  color: #46309f;
+}

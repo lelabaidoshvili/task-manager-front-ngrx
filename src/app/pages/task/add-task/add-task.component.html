@@ -1,0 +1,113 @@
+<!-------------------------Task Form------------------------>
+<div class="taskForm">
+  <div class="cont">
+    <form [formGroup]="taskFormGroup">
+      <div class="wrapper">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="name"
+            formControlName="name"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IssueType </mat-label>
+          <mat-select class="form-control" formControlName="issueTypeId">
+            <mat-option
+              *ngFor="let issue of activeIssues; let i = index"
+              [value]="issue.id"
+            >
+              {{ issue.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="description"
+            formControlName="description"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Assignee</mat-label>
+          <mat-select class="form-control" formControlName="assigneeId">
+            <mat-option *ngFor="let user of assignee" [value]="user">
+              {{ user.email }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+        <mat-label>Epic Id</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="epicId"
+          formControlName="epicId"
+        />
+      </mat-form-field> -->
+
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
+          <mat-select class="form-control" formControlName="priority">
+            <mat-option
+              *ngFor="let priority of priorityEnum"
+              [value]="priority"
+            >
+              {{ priority }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Reporter</mat-label>
+          <mat-select class="form-control" formControlName="reporterId">
+            <mat-option *ngFor="let user of assignee" [value]="user">
+              {{ user.email }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="data.isBacklog" appearance="outline">
+          <mat-label> Board</mat-label>
+          <mat-select class="form-control" formControlName="boardId">
+            <mat-option *ngFor="let board of boards" [value]="board.id">
+              {{ board.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+      </div>
+      <div class="row" formArrayName="taskProperty">
+        <div
+          *ngFor="let property of taskProperty.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [placeholder]="property.get('name')?.value"
+              formControlName="value"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group">
+      <button class="btn" (click)="submit()" mat-raised-button color="primary">
+        Save
+      </button>
+
+      <button class="btn" mat-stroked-button (click)="dialogRef.close()">
+        Close
+      </button>
+      <mat-checkbox [(ngModel)]="checked" (click)="onCheckboxClick()">Done</mat-checkbox>
+      <p class="task-status">{{data.column?.taskStatus}}</p>
+    </div>
+  </div>
+</div>

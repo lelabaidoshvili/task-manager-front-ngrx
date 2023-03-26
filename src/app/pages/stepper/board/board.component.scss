@@ -1,0 +1,305 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+}
+.hideColumns {
+  display: none;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.update {
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+.mat-form-field.sized {
+  width: 20rem;
+  margin-top: 7px;
+}
+.add {
+  margin-bottom: 1rem;
+}
+
+.btn-col {
+  margin-top: 1rem;
+}
+
+.primary-button {
+  margin-top: 10px;
+  background-color: #779d82;
+  color: #e8ebfc;
+}
+.warn-button {
+  background-color: #d27569;
+  color: #e8ebfc;
+}
+.next {
+  margin-top: 30px;
+}
+
+mat-icon {
+  margin-left: 1rem;
+}
+.add-board {
+  margin-bottom: 12px;
+}
+button {
+  margin-top: 12px;
+  margin-right: 10px;
+}
+
+.btn-up {
+  position: relative;
+}
+td.btn-up {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  width: 100%;
+}
+td.btn-up button {
+  width: 100%;
+}
+
+mat-list {
+  height: 10rem;
+  width: 30rem;
+  overflow: auto;
+  border-bottom: 2px solid #504a90;
+}
+.scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 25px;
+
+  margin: 6px auto;
+}
+
+mat-label.label {
+  color: #504a90;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.mat-list-item:nth-child(1) {
+  background-color: #504a90;
+}
+
+.mat-list-item span {
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.mat-list-item:nth-child(1) span {
+  color: #fff;
+}
+
+.mat-list-item {
+  border-bottom: 1px solid #d4d0fe;
+  background-color: #f2f0f0;
+}
+mat-progress-bar {
+  width: 15rem;
+  margin-top: 15px;
+}
+
+@media (max-width: 1450px) {
+  form {
+    width: 100%;
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 0.2rem;
+    width: 100%;
+  }
+
+  .tableForms {
+    padding: 0.2rem;
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  table {
+    width: 100%;
+  }
+  tbody .vertical {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
+  thead {
+    display: none;
+  }
+
+  td {
+    width: 100%;
+  }
+  tbody {
+    background-color: transparent;
+  }
+  tbody .mat-form-field {
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .mat-form-field input {
+    margin: 0 auto;
+  }
+  .mat-form-field {
+    width: 100%;
+    padding: 0;
+  }
+
+  .showColumns {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #504a90;
+    margin-bottom: 0.3rem;
+  }
+
+  .add-td {
+    display: flex;
+    align-items: center;
+  }
+  .primary-button.add-mob {
+    margin-left: 2rem;
+  }
+  .primary-button {
+    margin: 1rem;
+  }
+  td.btn-up div {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 100%;
+    padding: 0 2rem;
+  }
+  td.btn-up div button {
+    height: 100%;
+  }
+}
+@media (max-width: 1024px) {
+  //------update
+  .update {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .tableFormsUpdate {
+    padding: 0.2rem;
+    width: 80%;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .wrapperUpdate {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .tableUpdate {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .tableUpdate tbody tr {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .addUpdateBtn.add-board {
+    margin-left: 6rem;
+  }
+  .addUpdateBtn.showColumns {
+    margin-left: 6rem;
+  }
+  .addUpdateBtn.board-save {
+    margin-left: 6rem;
+  }
+
+  .addUpdateBtn.primary-button {
+    margin-left: 6rem;
+  }
+  //----------------------
+  form {
+    width: 90vw;
+  }
+  .tableForms {
+    width: 80%;
+  }
+
+  .wrapper {
+    width: 80%;
+  }
+
+  .primary-button {
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  form {
+    width: 100vw;
+  }
+
+  .wrapper {
+    width: 80%;
+  }
+
+  .tableUpdate {
+    width: 80%;
+
+    margin: 0 auto;
+  }
+
+  .tableUpdate tbody tr {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .addUpdateBtn.add-board {
+    margin-left: 2rem;
+  }
+  .addUpdateBtn.showColumns {
+    margin-left: 2rem;
+  }
+  .addUpdateBtn.board-save {
+    margin-left: 2rem;
+  }
+
+  .addUpdateBtn.primary-button {
+    margin-left: 4rem;
+  }
+
+  tbody .mat-form-field {
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .scroll {
+    // width: 40%;
+    margin: 6px auto;
+  }
+  .scroll mat-list {
+    width: 90%;
+  }
+
+  .add-td {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,285 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fefefe;
+  height: 640px;
+  padding: 25px 20px 10px 20px;
+  margin: auto;
+}
+@media (max-width: 660px) {
+  .container {
+    margin: auto;
+    overflow-y: scroll;
+  }
+
+}
+
+.container .more {
+  width: auto;
+  align-self: flex-end;
+}
+.column-container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  gap: 25px;
+  padding: 5px 30px 15px 30px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+@media (max-width: 950px) {
+  .column-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    align-items: center;
+    .column {
+      width: 300px;
+    }
+  }
+
+}
+@media (max-width: 600px) {
+  .more {
+    margin-bottom: 15px;
+  }
+
+}
+.header {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  gap: 5rem;
+
+  h3 {
+    color: #555;
+    font-weight: 500;
+    margin-left: 20px;
+  }
+
+  h1 {
+    color: #504a8f;
+    font-weight: 600;
+    margin-left: 20px;
+  }
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #7659e9;
+  color: #fff;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(255, 255, 255);
+  margin-left: -6px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.mat-icon {
+  cursor: pointer;
+  color: #b4b3b3;
+}
+.add-col {
+  height: 2.3rem;
+}
+
+
+
+
+.column {
+  width: 20rem;
+  height: auto;
+  min-height: 30rem;
+  background-color: #eaeaec;
+  border-radius: 10px;
+  padding: 20px;
+  overflow: scroll;
+}
+@media (max-width: 1000px) {
+  .column {
+    width: 700px;
+    overflow: scroll;
+  }
+
+}
+
+
+.example-custom-placeholder {
+  width: 235px;
+  height: 500px;
+  background-color: #6161ec;
+  border-radius: 10px;
+}
+.all-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+
+
+.add-column_button {
+  font-size: 15px;
+  color: #46309f;
+  font-style: italic;
+  font-weight: bold;
+}
+.board-name {
+  font-size: 20px;
+  color: #504a8f;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  padding: 100px;
+}
+
+.example-container {
+  width: 400px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.example-list {
+  border: solid 1px #ccc;
+  min-height: 80px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  margin-top: 52px;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.text {
+  margin-bottom: 5px;
+}
+.card {
+  width: 100%;
+  height: 90px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #d0cece;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 15px;
+  position: relative;
+}
+.card p,
+.card h4 {
+  margin: 0;
+}
+
+.dots {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.del {
+  text-align: center;
+}
+
+.ass {
+  width: 25px;
+  height: 25px;
+  border: none;
+  margin-top: 35px;
+  margin-right: -5px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.task-button {
+  border: 1px solid #d0cece;
+  width: 80px;
+  height: 30px;
+  margin: auto;
+  border-radius: 5px;
+}
+.task-button:hover {
+  background-color: white;
+  color: #a9a6a6;
+}
+.card-button {
+  padding: 50px;
+}
+
+.column-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+.click {
+  width: 50px;
+  height: 25px;
+  border: solid 1px transparent;
+  border-radius: 20px;
+  background-color: #d5d1d1;
+  color: white;
+}

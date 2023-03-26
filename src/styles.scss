@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+*html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f7;
+}
+
+.mat-step-header {
+  pointer-events: none;
+}
+.mat-dialog-container {
+  // background-color: transparent;
+}
+.dialog-container {
+  background-color: #f7f6f6;
+  padding: 0;
+  border-radius: 8px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

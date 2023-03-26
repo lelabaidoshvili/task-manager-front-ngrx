@@ -1,0 +1,58 @@
+<button
+  class="add-epic"
+  mat-raised-button
+  color="primary"
+  (click)="toggleUserForm()"
+>
+  Add Epics
+</button>
+<ng-container *ngIf="createEpics">
+  <form [formGroup]="epicGroup">
+    <div class="wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="name" formControlName="name" />
+        <mat-icon matSuffix>{{
+          epicGroup.get("name").invalid && epicGroup.get("name").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="description"
+          formControlName="description"
+        />
+        <mat-icon matSuffix>{{
+          epicGroup.get("description").invalid &&
+          epicGroup.get("description").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</ng-container>
+<button
+  class="epic"
+  [disabled]="epicGroup.invalid || active || goNextStep"
+  mat-raised-button
+  color="basic"
+  (click)="saveEpics()"
+>
+  Save
+</button>
+
+<button
+  class="next"
+  [disabled]="!goNextStep"
+  mat-raised-button
+  color="primary"
+  (click)="submit()"
+>
+  Next
+</button>
+<mat-progress-bar *ngIf="active" mode="indeterminate"></mat-progress-bar>

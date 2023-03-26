@@ -1,0 +1,135 @@
+<!-- <button mat-stroked-button (click)="goTo()">Go To</button> -->
+
+<div class="buttons">
+  <button
+    class="add-user"
+    mat-raised-button
+    color="primary"
+    (click)="toggleUserForm()"
+  >
+    + Create User
+  </button>
+</div>
+<ng-container *ngIf="createUser">
+  <form [formGroup]="usersFormGroup">
+    <div class="wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Add Name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="firstName"
+          formControlName="firstName"
+        />
+        <mat-icon matSuffix>{{
+          usersFormGroup.get("firstName").invalid &&
+          usersFormGroup.get("firstName").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Add lastName</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="lastName"
+          formControlName="lastName"
+        />
+        <mat-icon matSuffix>{{
+          usersFormGroup.get("lastName").invalid &&
+          usersFormGroup.get("lastName").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Add Email</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="email"
+          formControlName="email"
+        />
+        <mat-icon matSuffix>{{
+          usersFormGroup.get("email").invalid &&
+          usersFormGroup.get("email").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Add Phone</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="mobileNumber"
+          formControlName="mobileNumber"
+        />
+        <mat-icon matSuffix>{{
+          usersFormGroup.get("mobileNumber").invalid &&
+          usersFormGroup.get("mobileNumber").touched
+            ? "mood_bad"
+            : "sentiment_very_satisfied"
+        }}</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</ng-container>
+
+<button
+  class="user"
+  [disabled]="usersFormGroup.invalid"
+  mat-raised-button
+  color="basic"
+  (click)="saveUser()"
+>
+  Save
+</button>
+<button
+  *ngIf="!additionalUser"
+  class="next"
+  [disabled]="!goNextStep"
+  mat-raised-button
+  color="primary"
+  (click)="submit()"
+>
+  Next
+</button>
+<button
+  *ngIf="!additionalUser"
+  class="skip"
+  mat-stroked-button
+  color="primary"
+  (click)="skip()"
+>
+  Skip
+</button>
+<mat-progress-bar *ngIf="active" mode="indeterminate"></mat-progress-bar>
+<div class="scrolls">
+  <div class="scroll">
+    <mat-label class="label">Project Users</mat-label>
+    <mat-list class="example-list-wrapping">
+      <mat-list-item
+        *ngFor="let user of projectUsers.slice().reverse()"
+        lines="3"
+      >
+        <span matListItemTitle>{{ user?.email }}</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="scroll">
+    <mat-label class="label">All Users</mat-label>
+    <mat-list class="example-list-wrapping">
+      <mat-list-item *ngFor="let user of users" lines="3">
+        <span matListItemTitle>{{ user?.email }} </span>
+        <button mat-raised-button (click)="addOldUsersToProject(user)">
+          Add User
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
