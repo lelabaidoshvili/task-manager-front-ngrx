@@ -69,9 +69,12 @@ export class TaskComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loadAllInTasks();
     this.store.select(currentProject).subscribe((project) => {
-      this.currentProject = project
+      this.currentProject = project;
+      if(this.currentProject) {
+        this.loadAllInTasks();
+      }
+
     })
 
     // this.projectFacadeService.current.subscribe((res) => {
@@ -118,17 +121,12 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
   loadAllInTasks() {
     combineLatest([
-      this.projectFacadeService.current$,
       this.boardFacadeService.getMyBoards$(),
       this.projectFacadeService.getProjectUsers$(),
       this.IssueTypeFacadeService.getIssueTypes(),
     ])
       .pipe(takeUntil(this.sub$))
-      .subscribe(([project, boards, users, issueTypes]) => {
-        this.currentProject = project;
-
-        console.log('current');
-        console.log(this.currentProject);
+      .subscribe(([ boards, users, issueTypes]) => {
 
         this.currentBoards = boards;
 

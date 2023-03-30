@@ -5,26 +5,43 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, switchMap} from 'rxjs';
 import { ProjectFacadeService } from '../../facades/project.facade.service';
+import {ProjectStateModule} from "../../store";
+import {currentProject} from "../../store/project/project.selectors";
+import {Store} from "@ngrx/store";
 
 @Injectable()
 export class ProjectInterceptor implements HttpInterceptor {
-  constructor(private projectFacade: ProjectFacadeService) {}
+  constructor(private projectFacade: ProjectFacadeService,private store: Store<{project: ProjectStateModule}>) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    // const project = this.projectFacade.getProject();
-    const project = this.projectFacade.current.getValue();
-    if (project) {
-      return next.handle(
-        request.clone({
-          setHeaders: { project: String(project.id) },
+
+
+    return this.store.select(currentProject)
+      .pipe(
+        switchMap((project) => {
+          if(project) {
+            request = request.clone({
+              setHeaders: {
+                'project': project.id.toString()
+              }
+            });
+          }
+          return next.handle(request);
         })
-      );
-    }
-    return next.handle(request);
-  }
+       )
+    // const project = this.projectFacade.getProject();
+    // if (project) {
+    //   return next.handle(
+    //     request.clone({
+    //       setHeaders: { project: String(project.id) },
+    //     })
+    //   );
+    // }
+    // return next.handle(request);
+     }
 }
