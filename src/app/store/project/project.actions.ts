@@ -7,7 +7,7 @@ export const loadProjects = createAction(
 
 export const loadProjectsSuccess = createAction(
   '[Project] Load Projects Success',
-  props<{ data: any }>()
+  props<{ projects: Project[]}>()
 );
 
 export const loadProjectsFailure = createAction(
@@ -37,3 +37,25 @@ export const saveProjectSuccess = createAction(
   '[Project] Create Project Success',
   props<{project: Project}>()
 )
+export const createProject = createAction(
+  '[Project] Create Project ',
+  props<{ project: Project }>()
+);
+
+export const updateProject = createAction(
+  '[Project] Update Project ',
+  props<{ projectId: number; project: Project }>()
+);
+
+//--
+export const loadAllProjects = createAction('[Project] Load All Projects ');
+
+export const loadAllProjectsSuccess = createAction(
+  '[Project] Load All Projects Success',
+  props<{ projects: Project[] }>()
+);
+
+export const loadAllProjectsFailure = createAction(
+  '[Project] Load All Projects Failure',
+  props<{ error: any }>()
+);

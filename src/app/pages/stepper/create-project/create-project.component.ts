@@ -8,7 +8,14 @@ import { ProjectFacadeService } from 'src/app/facades/project.facade.service';
 import { StepperService } from '../stepper.service';
 import { CreateProjectService } from './create-project.service';
 import {Store} from "@ngrx/store";
-import {loadProjects, ProjectStateModule, saveProjectSuccess, setProject} from "../../../store";
+import {
+  createProject,
+  loadProjects,
+  ProjectStateModule,
+  saveProjectSuccess,
+  setProject,
+  updateProject
+} from "../../../store";
 
 @Component({
   selector: 'app-create-project',
@@ -75,42 +82,20 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
 
     if (!this.projectFormGroup.value.id) {
       this.active = true;
-      this.createProjectService
-        .createProject(this.projectFormGroup.value)
-        .pipe(
-          takeUntil(this.sub$),
+      this.store.dispatch(
+        createProject({project: this.projectFormGroup.value})
+      );
+    } else {
+      this.store.dispatch(
+        updateProject({
+          projectId: this.projectFormGroup.value.id,
+          project: this.projectFormGroup.value,
+        })
+      )
+
         //   tap((res) => this.projectFacadeService.setProject(res.id)),
         //   switchMap(() => this.projectFacadeService.getOnlyMyProjects$())
         // )
-        tap((response) => {
-          const project = response;
-          this.store.dispatch(saveProjectSuccess({project}));
-          this.store.dispatch(setProject({projectId: project.id}))
-        })
-        )
-        .subscribe((response) => {
-          this.boardFacadeService.additional.next(false);
-          // this.active = true;
-
-          this._snackBar.open('Project Created', 'Close', { duration: 2000 });
-          setTimeout(() => {
-            this.stepperService.goToStep(1);
-          }, 3000);
-
-          console.log(response);
-        });
-    } else {
-      this.projectFacadeService
-        .updateProject(
-          this.projectFormGroup.value.id,
-          this.projectFormGroup.value
-        )
-        .pipe(
-          takeUntil(this.sub$),
-          tap((res) => this.projectFacadeService.setProject(res.id)),
-          switchMap(() => this.projectFacadeService.getOnlyMyProjects$())
-        )
-        .subscribe((response) => {});
 
       this.router.navigate(['/tables']);
     }

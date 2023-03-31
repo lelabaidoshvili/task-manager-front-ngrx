@@ -64,6 +64,7 @@ export class HeaderComponent implements OnInit {
       console.log('current users project');
 
       console.log(this.currentUsersProjects);
+      this.getMyProjects();
 
     });
     this.currentUser = this.authFacadeService.user;

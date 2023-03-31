@@ -69,12 +69,18 @@ export class TaskComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // this.store.select(currentProject).subscribe((project) => {
+    //   this.currentProject = project;
+    //   if(this.currentProject) {
+    //     this.loadAllInTasks();
+    //   }
+    //
+    // })
     this.store.select(currentProject).subscribe((project) => {
-      this.currentProject = project;
-      if(this.currentProject) {
+      if(project) {
+        this.currentProject = project;
         this.loadAllInTasks();
       }
-
     })
 
     // this.projectFacadeService.current.subscribe((res) => {
