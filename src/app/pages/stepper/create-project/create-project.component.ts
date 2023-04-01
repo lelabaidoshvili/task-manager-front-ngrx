@@ -51,29 +51,27 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadProjects());
-    // this.route.params
-    //   .pipe(
-    //     switchMap((params: any) => {
-    //       if (params['id']) {
-    //         this.updateState = true;
-    //          return this.projectFacadeService.getProjectById(params['id']);
-    //
-    //       }
-    //       return of(null);
-    //     })
-    //   )
-    //   .subscribe((response) => {
-    //     console.log('project by id');
-    //     console.log(response);
+    this.route.params
+      .pipe(
+        switchMap((params: any) => {
+          if (params['id']) {
+            this.updateState = true;
+            return this.projectFacadeService.getProjectById(params['id']);
+          }
+          return of(null);
+        })
+      )
+      .subscribe((response) => {
+        console.log('project by id');
+        console.log(response);
 
-  //       if (response) {
-  //         this.projectFormGroup.patchValue({
-  //           id: response.id,
-  //           ...response,
-  //         });
-  //       }
-  //     });
+        if (response) {
+          this.projectFormGroup.patchValue({
+            id: response.id,
+            ...response,
+          });
+        }
+      });
    }
 
   submit() {

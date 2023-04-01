@@ -9,6 +9,9 @@ import { UsersEditComponent } from './users-edit/users-edit.component';
 import { PageEvent } from '@angular/material/paginator';
 import { UsersHttpService } from '../../core/services/users-http.service';
 import { UsersRoleComponent } from './users-role/users-role.component';
+import {Store} from "@ngrx/store";
+import {UserStateModel} from "../../store/users";
+import {loadUsers} from "../../store/users";
 
 @Component({
   selector: 'app-users',
@@ -26,11 +29,19 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private userService: UsersHttpService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store<{user: UserStateModel}>
   ) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.store.dispatch(
+      loadUsers({ page: this.pageIndex, limit: this.pageSize })
+    );
+    this.store
+      .select((state) => state.user)
+      .subscribe((data) => {
+        this.dataSource.data = data.users;
+      });
   }
   getUsers() {
     this.userService

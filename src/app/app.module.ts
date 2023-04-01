@@ -12,7 +12,7 @@ import { ProjectInterceptor } from './core/interceptors/project.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {ProjectEffect, projectReducer} from "./store";
+import {ProjectEffect, projectReducer, UserEffects, userReducer} from "./store";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,10 +23,11 @@ import {ProjectEffect, projectReducer} from "./store";
     SharedModule,
     MainLayoutModule,
     StoreModule.forRoot({
-      project: projectReducer
+      project: projectReducer,
+      user: userReducer
     }, {}),
     EffectsModule.forRoot([
-      ProjectEffect
+      ProjectEffect, UserEffects
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
